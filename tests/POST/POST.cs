@@ -7,10 +7,16 @@ namespace POST
     public class POST
     {
         [TestMethod]
-        public void P0ST()
+        public void Post()
         {
             Debug.WriteLine("POST");
             Assert.IsTrue(true);
+            PostBoot();
+        }
+
+        private static void PostBoot()
+        {
+            Debug.WriteLine("your code here");
         }
     }
 }
