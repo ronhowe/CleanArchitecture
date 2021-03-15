@@ -3,6 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>TrafficLight.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TrafficLight.png" />
+    <None Remove="TrafficLight.png" />
+  </ItemGroup>
 
 </Project>

@@ -9,6 +9,10 @@ namespace Client.ConsoleApp
     {
         static void Main(string[] args)
         {
+            Uri uri = new Uri("https://localhost:5001/health");
+
+            Console.Title = uri.ToString();
+
             Refresh(ConsoleColor.DarkYellow);
 
             HttpClient client = new();
@@ -17,7 +21,7 @@ namespace Client.ConsoleApp
             {
                 try
                 {
-                    HttpResponseMessage response = client.GetAsync("https://localhost:5001/health").Result;
+                    HttpResponseMessage response = client.GetAsync(uri).Result;
 
                     response.EnsureSuccessStatusCode();
 
