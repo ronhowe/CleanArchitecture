@@ -20,17 +20,16 @@ namespace POST
 
         private static void PostBoot()
         {
-            HttpClient client = new HttpClient();
-
-            try
+            int loop = 100;
+            for (int i = 0; i < loop; i++)
             {
-                HttpResponseMessage response = client.GetAsync("https://localhost:5001/api/WeatherForecast").Result;
-
-                response.EnsureSuccessStatusCode();
-            }
-            catch (HttpRequestException e)
-            {
-                Debug.WriteLine(e.Message);
+                if ((i % 5) == 0) {
+                    Debug.WriteLine("-");
+                }
+                else
+                {
+                    Debug.WriteLine("|");
+                }
             }
         }
     }
