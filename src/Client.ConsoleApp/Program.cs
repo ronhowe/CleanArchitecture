@@ -8,15 +8,39 @@ namespace Client.ConsoleApp
     {
         static void Main(string[] args)
         {
-            HttpClient client = new HttpClient();
+            var result = false;
 
-            Console.WriteLine("Running...");
+            Refresh(result);
+
+            HttpClient client = new();
 
             while (true)
             {
-                HttpResponseMessage response = client.GetAsync("https://localhost:5001/health").Result;
+                try
+                {
+                    HttpResponseMessage response = client.GetAsync("https://localhost:5001/health").Result;
 
-                response.EnsureSuccessStatusCode();
+                    response.EnsureSuccessStatusCode();
+
+                    result = true;
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+                finally
+                {
+                    Refresh(result);
+
+                    result = false;
+                }
+            }
+
+            static void Refresh(bool result)
+            {
+                Console.Clear();
+
+                Console.BackgroundColor = result ? ConsoleColor.Green : ConsoleColor.Red;
             }
         }
     }
