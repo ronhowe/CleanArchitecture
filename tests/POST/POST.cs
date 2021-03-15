@@ -10,27 +10,10 @@ namespace POST
     public class POST
     {
         [TestMethod]
-        public void Post()
+        public void Boot()
         {
-            Debug.WriteLine("POST");
             Debug.WriteLine(DateTime.Now);
             Assert.IsTrue(true);
-            PostBoot();
-        }
-
-        private static void PostBoot()
-        {
-            int loop = 100;
-            for (int i = 0; i < loop; i++)
-            {
-                if ((i % 5) == 0) {
-                    Debug.WriteLine("-");
-                }
-                else
-                {
-                    Debug.WriteLine("|");
-                }
-            }
         }
     }
 }
