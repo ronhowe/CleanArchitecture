@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Threading;
 
 namespace Client.ConsoleApp
 {
@@ -8,9 +9,7 @@ namespace Client.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var result = false;
-
-            Refresh(result);
+            Refresh(ConsoleColor.DarkYellow);
 
             HttpClient client = new();
 
@@ -22,26 +21,25 @@ namespace Client.ConsoleApp
 
                     response.EnsureSuccessStatusCode();
 
-                    result = true;
+                    Refresh(ConsoleColor.DarkGreen);
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.Message);
-                }
-                finally
-                {
-                    Refresh(result);
 
-                    result = false;
+                    Refresh(ConsoleColor.DarkRed);
                 }
+
+                Thread.Sleep(1000);
             }
 
-            static void Refresh(bool result)
-            {
-                Console.Clear();
+        }
 
-                Console.BackgroundColor = result ? ConsoleColor.Green : ConsoleColor.Red;
-            }
+        private static void Refresh(ConsoleColor color)
+        {
+            Console.BackgroundColor = color;
+
+            Console.Clear();
         }
     }
 }
