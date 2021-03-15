@@ -13,7 +13,6 @@ namespace POST
         public void Boot()
         {
             Debug.WriteLine(DateTime.Now);
-            Assert.IsTrue(true);
         }
     }
 }
