@@ -25,7 +25,18 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POST", "tests\POST\POST.csproj", "{261D4369-1095-49F4-B38C-2F496840AFD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.ConsoleApp", "src\Client.ConsoleApp\Client.ConsoleApp.csproj", "{5C825229-1101-4266-8A9F-06018E5C3782}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.ConsoleApp", "src\Client.ConsoleApp\Client.ConsoleApp.csproj", "{5C825229-1101-4266-8A9F-06018E5C3782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "new", "new", "{643CE9C3-A87B-471C-ADA8-6AE2EF6B5C91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "new\WebApplication1\WebApplication1.csproj", "{EA2EA135-47AA-4F81-B311-63B43BB91D3D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9FEF2AD8-99EF-403C-82F5-C5AF28B03044}"
+	ProjectSection(SolutionItems) = preProject
+		docs\Commits.md = docs\Commits.md
+		docs\Links.md = docs\Links.md
+		docs\ToDo.md = docs\ToDo.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +84,10 @@ Global
 		{5C825229-1101-4266-8A9F-06018E5C3782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C825229-1101-4266-8A9F-06018E5C3782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C825229-1101-4266-8A9F-06018E5C3782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA2EA135-47AA-4F81-B311-63B43BB91D3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA2EA135-47AA-4F81-B311-63B43BB91D3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA2EA135-47AA-4F81-B311-63B43BB91D3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA2EA135-47AA-4F81-B311-63B43BB91D3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +102,7 @@ Global
 		{277029AF-D9E1-4B75-9F11-48FEA7345AD7} = {664D406C-2F83-48F0-BFC3-408D5CB53C65}
 		{261D4369-1095-49F4-B38C-2F496840AFD9} = {664D406C-2F83-48F0-BFC3-408D5CB53C65}
 		{5C825229-1101-4266-8A9F-06018E5C3782} = {6ED356A7-8B47-4613-AD01-C85CF28491BD}
+		{EA2EA135-47AA-4F81-B311-63B43BB91D3D} = {643CE9C3-A87B-471C-ADA8-6AE2EF6B5C91}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CB609D9-5D54-4C11-A371-DAAC8B74E430}
