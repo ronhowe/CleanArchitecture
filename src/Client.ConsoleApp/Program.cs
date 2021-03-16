@@ -38,8 +38,8 @@ namespace Client.ConsoleApp
             Trace.WriteLine($"config.TenantId={config.TenantId}");
 
             Uri uri = new Uri(config.BaseAddress);
-            HttpClient anonymousHttpClient = new HttpClient();
             Stopwatch stopWatch = new Stopwatch();
+            HttpResponseMessage response;
             TimeSpan ts;
             string elapsed;
             SetTimer();
@@ -52,28 +52,6 @@ namespace Client.ConsoleApp
             {
                 try
                 {
-                    ///////////////////////////////////////////////////////
-                    #region UNAUTHENTICATED
-
-                    stopWatch.Start();
-
-                    Trace.WriteLine($"anonymous_request_start={DateTime.Now.ToString()}");
-                    HttpResponseMessage response = anonymousHttpClient.GetAsync(uri).Result;
-                    Trace.WriteLine($"anonymous_request_stop={DateTime.Now.ToString()}");
-
-                    stopWatch.Stop();
-
-                    ts = stopWatch.Elapsed;
-
-                    elapsed = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-
-                    Trace.WriteLine($"anonymous_request_elapsed={elapsed}");
-
-                    Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.Unauthorized);
-
-                    #endregion UNAUTHENTICATED
-                    ///////////////////////////////////////////////////////
-
                     ///////////////////////////////////////////////////////
                     #region AUTHENTICATE
 
@@ -102,7 +80,7 @@ namespace Client.ConsoleApp
 
                     Trace.WriteLine($"token_request_elapsed={elapsed}");
 
-                    Assert.IsFalse(string.IsNullOrEmpty(result.AccessToken));
+                    Assert.IsFalse(string.IsNullOrEmpty(result.AccessToken), "AUTHENTICATE TEST FAILURE");
 
                     Trace.WriteLine($"token={result.AccessToken}");
 
@@ -110,17 +88,40 @@ namespace Client.ConsoleApp
                     ///////////////////////////////////////////////////////
 
                     ///////////////////////////////////////////////////////
+                    #region UNAUTHENTICATED
+
+                    var anonymousHttpClient = new HttpClient();
+
+                    stopWatch.Start();
+
+                    Trace.WriteLine($"anonymous_request_start={DateTime.Now.ToString()}");
+                    response = anonymousHttpClient.GetAsync(uri).Result;
+                    Trace.WriteLine($"anonymous_request_stop={DateTime.Now.ToString()}");
+
+                    stopWatch.Stop();
+
+                    ts = stopWatch.Elapsed;
+
+                    elapsed = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+                    Trace.WriteLine($"anonymous_request_elapsed={elapsed}");
+
+                    Assert.AreEqual(System.Net.HttpStatusCode.Unauthorized, response.StatusCode, "UNAUTHENTICATED TEST FAILURE");
+
+                    #endregion UNAUTHENTICATED
+                    ///////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////
                     #region AUTENTICATED
 
                     var authenticatedHttpClient = new HttpClient();
-                    var defaultRequestHeaders = authenticatedHttpClient.DefaultRequestHeaders;
 
+                    var defaultRequestHeaders = authenticatedHttpClient.DefaultRequestHeaders;
                     if (defaultRequestHeaders.Accept == null ||
                             !defaultRequestHeaders.Accept.Any(m => m.MediaType == "application/json"))
                     {
                         authenticatedHttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                     }
-
                     defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
                     stopWatch.Start();
@@ -137,7 +138,7 @@ namespace Client.ConsoleApp
 
                     Trace.WriteLine($"authenticated_request_elapsed={elapsed}");
 
-                    Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
+                    Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "AUTENTICATED TEST FAILURE");
 
                     string content = response.Content.ReadAsStringAsync().Result;
                     Trace.WriteLine($"content={content}");
@@ -146,22 +147,23 @@ namespace Client.ConsoleApp
                     ///////////////////////////////////////////////////////
 
                     Console.BackgroundColor = ConsoleColor.DarkGreen;
+                    Console.Clear();
+                    Console.WriteLine($"{DateTime.Now.ToString()}\nOK");
                 }
                 catch (Exception e)
                 {
-                    Trace.TraceError(e.Message);
-
                     Console.BackgroundColor = ConsoleColor.DarkRed;
+                    Console.Clear();
+                    Console.WriteLine($"{DateTime.Now.ToString()}\n{e.Message}");
                 }
                 finally
                 {
-                    Console.Clear();
                 }
+
+                Thread.Sleep(1000);
 
                 //aTimer.Stop();
                 //aTimer.Dispose();
-
-                Thread.Sleep(1000);
             }
         }
 
