@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.FeatureManagement;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using System;
@@ -37,7 +38,9 @@ namespace Server.WebApplication
                         opt.Authority = $"{Configuration["AAD:Instance"]}{Configuration["AAD:TenantId"]}";
                     });
 
+            services.AddAzureAppConfiguration();
             services.AddControllers();
+            services.AddFeatureManagement();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Server.WebApplication", Version = "v1" });
@@ -53,6 +56,8 @@ namespace Server.WebApplication
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Server.WebApplication v1"));
             }
+
+            app.UseAzureAppConfiguration();
 
             app.UseHttpsRedirection();
 
