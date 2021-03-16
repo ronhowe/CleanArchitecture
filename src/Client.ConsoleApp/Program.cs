@@ -15,7 +15,7 @@ namespace Client.ConsoleApp
     {
         static void Main(string[] args)
         {
-            Refresh(ConsoleColor.DarkYellow);
+            Console.Clear();
 
             ///////////////////////////////////////////////////////
             #region POST
@@ -42,6 +42,8 @@ namespace Client.ConsoleApp
             Stopwatch stopWatch = new Stopwatch();
             TimeSpan ts;
             string elapsed;
+            SetTimer();
+            aTimer.Start();
 
             #endregion CONFIGURATION
             ///////////////////////////////////////////////////////
@@ -53,8 +55,6 @@ namespace Client.ConsoleApp
                     ///////////////////////////////////////////////////////
                     #region UNAUTHENTICATED
 
-                    SetTimer();
-
                     stopWatch.Start();
 
                     Trace.WriteLine($"anonymous_request_start={DateTime.Now.ToString()}");
@@ -62,10 +62,6 @@ namespace Client.ConsoleApp
                     Trace.WriteLine($"anonymous_request_stop={DateTime.Now.ToString()}");
 
                     stopWatch.Stop();
-
-                    aTimer.Stop();
-
-                    aTimer.Dispose();
 
                     ts = stopWatch.Elapsed;
 
@@ -92,8 +88,6 @@ namespace Client.ConsoleApp
 
                     AuthenticationResult result = null;
 
-                    SetTimer();
-
                     stopWatch.Start();
 
                     Trace.WriteLine($"_request_start={DateTime.Now.ToString()}");
@@ -101,10 +95,6 @@ namespace Client.ConsoleApp
                     Trace.WriteLine($"token_request_stop={DateTime.Now.ToString()}");
 
                     stopWatch.Stop();
-
-                    aTimer.Stop();
-
-                    aTimer.Dispose();
 
                     ts = stopWatch.Elapsed;
 
@@ -133,8 +123,6 @@ namespace Client.ConsoleApp
 
                     defaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.AccessToken);
 
-                    SetTimer();
-
                     stopWatch.Start();
 
                     Trace.WriteLine($"authenticated_request_start={DateTime.Now.ToString()}");
@@ -142,10 +130,6 @@ namespace Client.ConsoleApp
                     Trace.WriteLine($"authenticated_request_stop={DateTime.Now.ToString()}");
 
                     stopWatch.Stop();
-
-                    aTimer.Stop();
-
-                    aTimer.Dispose();
 
                     ts = stopWatch.Elapsed;
 
@@ -161,24 +145,24 @@ namespace Client.ConsoleApp
                     #endregion AUTENTICATED
                     ///////////////////////////////////////////////////////
 
-                    Refresh(ConsoleColor.DarkGreen);
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;
                 }
                 catch (Exception e)
                 {
                     Trace.TraceError(e.Message);
 
-                    Refresh(ConsoleColor.DarkRed);
+                    Console.BackgroundColor = ConsoleColor.DarkRed;
                 }
+                finally
+                {
+                    Console.Clear();
+                }
+
+                //aTimer.Stop();
+                //aTimer.Dispose();
 
                 Thread.Sleep(1000);
             }
-        }
-
-        private static void Refresh(ConsoleColor color)
-        {
-            Console.BackgroundColor = color;
-
-            Console.Clear();
         }
 
         private static System.Timers.Timer aTimer;
@@ -194,7 +178,6 @@ namespace Client.ConsoleApp
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             Trace.WriteLine($"timer={DateTime.Now.ToString()}");
-            //Trace.WriteLine("OnTimedEvent @ {0:HH:mm:ss.fff}", e.SignalTime);
         }
     }
 }
