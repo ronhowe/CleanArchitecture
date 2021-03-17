@@ -9,14 +9,8 @@ namespace Solution.Client.TestProject
 {
     using static Testing;
 
-    public class Tests : TestBase
+    public class PenetrationTests : TestBase
     {
-        [Test]
-        public async Task POST()
-        {
-            Trace.WriteLine("POST");
-        }
-
         [Test]
         public async Task HealthCheckReturns200()
         {
@@ -30,13 +24,6 @@ namespace Solution.Client.TestProject
             HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsAnonymous();
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
-        }
-
-        [Test]
-        public async Task ServiceReturns403()
-        {
-            HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsDefaultUser();
-            response.StatusCode.Should().Be(HttpStatusCode.Forbidden);
         }
 
         [Test]
