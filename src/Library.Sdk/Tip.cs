@@ -1,4 +1,5 @@
 ﻿using Microsoft.Identity.Client;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -68,7 +69,7 @@ namespace Library.Sdk
 
                 Trace.WriteLine($"token_request_elapsed={elapsed}");
 
-                //Assert.IsFalse(string.IsNullOrEmpty(result.AccessToken), "AUTHENTICATE TEST FAILURE");
+                Assert.IsFalse(string.IsNullOrEmpty(result.AccessToken), "AUTHENTICATE TEST FAILURE");
 
                 Trace.WriteLine($"token={result.AccessToken}");
 
@@ -94,7 +95,7 @@ namespace Library.Sdk
 
                 Trace.WriteLine($"anonymous_request_elapsed={elapsed}");
 
-                //Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "ANONYMOUS TEST FAILURE");
+                Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "ANONYMOUS TEST FAILURE");
 
                 #endregion ANONYMOUS
                 ///////////////////////////////////////////////////////
@@ -118,7 +119,7 @@ namespace Library.Sdk
 
                 Trace.WriteLine($"unauthenticated_request_elapsed={elapsed}");
 
-                //Assert.AreEqual(System.Net.HttpStatusCode.Unauthorized, response.StatusCode, "UNAUTHENTICATED TEST FAILURE");
+                Assert.AreEqual(System.Net.HttpStatusCode.Unauthorized, response.StatusCode, "UNAUTHENTICATED TEST FAILURE");
 
                 #endregion UNAUTHENTICATED
                 ///////////////////////////////////////////////////////
@@ -150,7 +151,7 @@ namespace Library.Sdk
 
                 Trace.WriteLine($"authenticated_request_elapsed={elapsed}");
 
-                //Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "AUTENTICATED TEST FAILURE");
+                Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "AUTENTICATED TEST FAILURE");
 
                 string content = response.Content.ReadAsStringAsync().Result;
                 Trace.WriteLine($"content={content}");
@@ -161,6 +162,7 @@ namespace Library.Sdk
                 Console.BackgroundColor = ConsoleColor.DarkGreen;
                 Console.Clear();
                 Console.WriteLine($"{DateTime.Now.ToString()}\nOK");
+                Trace.TraceError($"{DateTime.Now.ToString()}\nOK");
 
             }
             catch (Exception e)
