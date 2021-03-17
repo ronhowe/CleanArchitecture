@@ -8,7 +8,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Timers;
 
-namespace Library.Sdk
+namespace Client.ConsoleApp
 {
     public static class Tip
     {

@@ -1,5 +1,4 @@
-﻿using Library.Sdk;
-using System.Threading;
+﻿using System.Threading;
 
 namespace Client.ConsoleApp
 {

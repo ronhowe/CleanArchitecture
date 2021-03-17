@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace Library.Sdk
+namespace Client.ConsoleApp
 {
     public class AuthConfig
     {
