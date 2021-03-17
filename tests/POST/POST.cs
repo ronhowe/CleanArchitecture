@@ -1,3 +1,4 @@
+using Library.Sdk;
 using Microsoft.Identity.Client;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -23,7 +24,7 @@ namespace POST
             #endregion POST
             ///////////////////////////////////////////////////////
 
-
+            Tip.Run();
         }
     }
 }

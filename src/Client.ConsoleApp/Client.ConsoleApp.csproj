@@ -28,4 +28,8 @@
         <PackageReference Include="MSTest.TestFramework" Version="2.2.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Library.Sdk\Library.Sdk.csproj" />
+    </ItemGroup>
+
 </Project>
