@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdk.Application.UnitTests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Domain", "src\Sdk.Domain\Sdk.Domain.csproj", "{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdk.Infrastructure", "src\Sdk.Infrastructure\Sdk.Infrastructure.csproj", "{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,10 @@ Global
 		{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +142,7 @@ Global
 		{95C58D57-3843-4315-AF8C-8CE78DBD844B} = {6ED356A7-8B47-4613-AD01-C85CF28491BD}
 		{A5AF8144-3FC2-4675-A33B-A713755582FA} = {664D406C-2F83-48F0-BFC3-408D5CB53C65}
 		{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5} = {6ED356A7-8B47-4613-AD01-C85CF28491BD}
+		{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8} = {6ED356A7-8B47-4613-AD01-C85CF28491BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3CB609D9-5D54-4C11-A371-DAAC8B74E430}
