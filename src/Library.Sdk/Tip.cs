@@ -12,7 +12,7 @@ namespace Library.Sdk
 {
     public static class Tip
     {
-        public static void Run()
+        public static bool Run()
         {
             ///////////////////////////////////////////////////////
             #region CONFIGURATION
@@ -163,7 +163,7 @@ namespace Library.Sdk
                 Console.Clear();
                 Console.WriteLine($"{DateTime.Now.ToString()}\nOK");
                 Trace.TraceError($"{DateTime.Now.ToString()}\nOK");
-
+                return true;
             }
             catch (Exception e)
             {
@@ -171,6 +171,7 @@ namespace Library.Sdk
                 Console.Clear();
                 Console.WriteLine($"{DateTime.Now.ToString()}\n{e.Message}");
                 Trace.TraceError($"{DateTime.Now.ToString()}\n{e.Message}");
+                return false;
             }
             finally
             {
