@@ -34,10 +34,12 @@ namespace Client.ConsoleApp
             Trace.WriteLine($"config.BaseAddress={config.BaseAddress}");
             Trace.WriteLine($"config.ClientId={config.ClientId}");
             Trace.WriteLine($"config.ClientSecret={config.ClientSecret}");
+            Trace.WriteLine($"config.HealthAddress={config.HealthAddress}");
             Trace.WriteLine($"config.ResourceID={config.ResourceID}");
             Trace.WriteLine($"config.TenantId={config.TenantId}");
 
             Uri uri = new Uri(config.BaseAddress);
+            Uri uri2 = new Uri(config.HealthAddress);
             Stopwatch stopWatch = new Stopwatch();
             HttpResponseMessage response;
             TimeSpan ts;
@@ -88,14 +90,14 @@ namespace Client.ConsoleApp
                     ///////////////////////////////////////////////////////
 
                     ///////////////////////////////////////////////////////
-                    #region UNAUTHENTICATED
+                    #region ANONYMOUS
 
                     var anonymousHttpClient = new HttpClient();
 
                     stopWatch.Start();
 
                     Trace.WriteLine($"anonymous_request_start={DateTime.Now.ToString()}");
-                    response = anonymousHttpClient.GetAsync(uri).Result;
+                    response = anonymousHttpClient.GetAsync(uri2).Result;
                     Trace.WriteLine($"anonymous_request_stop={DateTime.Now.ToString()}");
 
                     stopWatch.Stop();
@@ -105,6 +107,30 @@ namespace Client.ConsoleApp
                     elapsed = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
 
                     Trace.WriteLine($"anonymous_request_elapsed={elapsed}");
+
+                    Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode, "ANONYMOUS TEST FAILURE");
+
+                    #endregion ANONYMOUS
+                    ///////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////
+                    #region UNAUTHENTICATED
+
+                    var unauthenticatedHttpClient = new HttpClient();
+
+                    stopWatch.Start();
+
+                    Trace.WriteLine($"unauthenticated_request_start={DateTime.Now.ToString()}");
+                    response = unauthenticatedHttpClient.GetAsync(uri).Result;
+                    Trace.WriteLine($"unauthenticated_request_stop={DateTime.Now.ToString()}");
+
+                    stopWatch.Stop();
+
+                    ts = stopWatch.Elapsed;
+
+                    elapsed = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+                    Trace.WriteLine($"unauthenticated_request_elapsed={elapsed}");
 
                     Assert.AreEqual(System.Net.HttpStatusCode.Unauthorized, response.StatusCode, "UNAUTHENTICATED TEST FAILURE");
 

@@ -19,6 +19,7 @@ namespace POST
         }
         public string ClientSecret { get; set; }
         public string BaseAddress { get; set; }
+        public string HealthAddress { get; set; }
         public string ResourceID { get; set; }
 
         public static AuthConfig ReadFromJsonFile(string path)
