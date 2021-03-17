@@ -1,4 +1,4 @@
-﻿namespace Sdk.Library.Domain.Enums
+﻿namespace Sdk.Domain.Enums
 {
     public enum PriorityLevel
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdk.Library.Domain.Exceptions
+namespace Sdk.Domain.Exceptions
 {
     public class UnsupportedColourException : Exception
     {

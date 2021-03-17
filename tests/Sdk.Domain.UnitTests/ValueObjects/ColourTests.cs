@@ -1,9 +1,9 @@
-﻿using Sdk.Library.Domain.Exceptions;
-using Sdk.Library.Domain.ValueObjects;
+﻿using Sdk.Domain.Exceptions;
+using Sdk.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Sdk.Library.Domain.ValueObjects
+namespace Sdk.Domain.ValueObjects
 {
     public class ColourTests
     {

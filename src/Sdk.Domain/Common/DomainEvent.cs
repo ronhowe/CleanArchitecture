@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sdk.Library.Domain.Common
+namespace Sdk.Domain.Common
 {
     public interface IHasDomainEvent
     {

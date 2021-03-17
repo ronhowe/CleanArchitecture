@@ -1,9 +1,9 @@
-﻿using Sdk.Library.Domain.Common;
-using Sdk.Library.Domain.Exceptions;
+﻿using Sdk.Domain.Common;
+using Sdk.Domain.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Sdk.Library.Domain.ValueObjects
+namespace Sdk.Domain.ValueObjects
 {
     public class Colour : ValueObject
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sdk.Library.Domain.Common
+namespace Sdk.Domain.Common
 {
     public abstract class AuditableEntity
     {

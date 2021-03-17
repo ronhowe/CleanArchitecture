@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Sdk.Library.Domain\Sdk.Library.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Sdk.Domain\Sdk.Domain.csproj" />
   </ItemGroup>
 
 </Project>
