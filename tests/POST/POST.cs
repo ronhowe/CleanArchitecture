@@ -1,4 +1,3 @@
-using Library.Sdk;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Diagnostics;
@@ -18,8 +17,6 @@ namespace POST
 
             #endregion POST
             ///////////////////////////////////////////////////////
-
-            //Assert.IsTrue(Tip.Run());
         }
     }
 }

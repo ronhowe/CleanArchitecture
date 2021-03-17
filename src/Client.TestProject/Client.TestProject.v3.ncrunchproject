@@ -1,0 +1,15 @@
+﻿<ProjectConfiguration>
+  <Settings>
+    <IgnoredTests>
+      <NamedTestSelector>
+        <TestName>Solution.Client.TestProject.IntegrationTests.AuthenticatedTrusted</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Solution.Client.TestProject.IntegrationTests.AuthenticateTrusted</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Solution.Client.TestProject.IntegrationTests.ServiceReturns401ForUnauthenticatedUser</TestName>
+      </NamedTestSelector>
+    </IgnoredTests>
+  </Settings>
+</ProjectConfiguration>
