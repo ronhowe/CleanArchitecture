@@ -39,6 +39,7 @@ namespace Server.WebApplication
                     });
 
             services.AddAzureAppConfiguration();
+            services.AddHealthChecks();
             services.AddControllers();
             services.AddFeatureManagement();
             services.AddSwaggerGen(c =>
@@ -59,6 +60,7 @@ namespace Server.WebApplication
 
             app.UseAzureAppConfiguration();
 
+            app.UseHealthChecks("/health"); 
             app.UseHttpsRedirection();
 
             app.UseRouting();
