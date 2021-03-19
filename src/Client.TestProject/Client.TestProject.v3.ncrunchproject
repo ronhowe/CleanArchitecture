@@ -10,9 +10,6 @@
       <NamedTestSelector>
         <TestName>Solution.Client.TestProject.IntegrationTests.ServiceReturns401ForUnauthenticatedUser</TestName>
       </NamedTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Solution.Client.TestProject.PenetrationTests</FixtureName>
-      </FixtureTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>

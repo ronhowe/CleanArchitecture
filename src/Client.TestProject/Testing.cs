@@ -24,13 +24,13 @@ namespace Solution.Client.TestProject
         {
             _configuration = AuthConfig.ReadFromJsonFile("appsettings.json");
 
-            Trace.WriteLine($"config.Authority={_configuration.Authority}");
-            Trace.WriteLine($"config.BaseAddress={_configuration.BaseAddress}");
-            Trace.WriteLine($"config.ClientId={_configuration.ClientId}");
-            Trace.WriteLine($"config.ClientSecret={_configuration.ClientSecret}");
-            Trace.WriteLine($"config.HealthAddress={_configuration.HealthAddress}");
-            Trace.WriteLine($"config.ResourceID={_configuration.ResourceID}");
-            Trace.WriteLine($"config.TenantId={_configuration.TenantId}");
+            //Trace.WriteLine($"config.Authority={_configuration.Authority}");
+            //Trace.WriteLine($"config.BaseAddress={_configuration.BaseAddress}");
+            //Trace.WriteLine($"config.ClientId={_configuration.ClientId}");
+            //Trace.WriteLine($"config.ClientSecret={_configuration.ClientSecret}");
+            Trace.WriteLine($"config.GetAddress={_configuration.GetAddress}");
+            //Trace.WriteLine($"config.ResourceID={_configuration.ResourceID}");
+            //Trace.WriteLine($"config.TenantId={_configuration.TenantId}");
 
             _unauthorizedToken = GetBearerTokenAsync().Result;
             _authorizedToken = GetBearerTokenAsync().Result;
@@ -82,22 +82,27 @@ namespace Solution.Client.TestProject
         }
         public static async Task<HttpResponseMessage> GetHttpResponseMessageHealthAddressAsAnonymous()
         {
-            return await GetHttpResponseMessage(new Uri(_configuration.HealthAddress), null);
+            return await GetHttpResponseMessage(new Uri(_configuration.GetAddress), null);
+        }
+
+        public static async Task<HttpResponseMessage> GetHttpResponseMessageThirdPartyAddressAsAnonymous()
+        {
+            return await GetHttpResponseMessage(new Uri(_configuration.ThirdPartyAddress), null);
         }
 
         public static async Task<HttpResponseMessage> GetHttpResponseMessageBaseAddressAsAnonymous()
         {
-            return await GetHttpResponseMessage(new Uri(_configuration.BaseAddress), null);
+            return await GetHttpResponseMessage(new Uri(_configuration.GetAddress), null);
         }
 
         public static async Task<HttpResponseMessage> GetHttpResponseMessageBaseAddressAsDefaultUser()
         {
-            return await GetHttpResponseMessage(new Uri(_configuration.BaseAddress), _unauthorizedToken);
+            return await GetHttpResponseMessage(new Uri(_configuration.GetAddress), _unauthorizedToken);
         }
 
         public static async Task<HttpResponseMessage> GetHttpResponseMessageBaseAddressAsAdmin()
         {
-            return await GetHttpResponseMessage(new Uri(_configuration.BaseAddress), _authorizedToken);
+            return await GetHttpResponseMessage(new Uri(_configuration.GetAddress), _authorizedToken);
         }
 
 

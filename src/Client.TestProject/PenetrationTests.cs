@@ -12,25 +12,33 @@ namespace Solution.Client.TestProject
     public class PenetrationTests : TestBase
     {
         [Test]
-        public async Task HealthCheckReturns200()
+        public async Task TestNetConnection()
+        {
+            HttpResponseMessage response = await GetHttpResponseMessageThirdPartyAddressAsAnonymous();
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Test]
+        public async Task TestAppConnection()
         {
             HttpResponseMessage response = await GetHttpResponseMessageHealthAddressAsAnonymous();
+            Trace.WriteLine(response.Headers);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
 
-        [Test]
-        public async Task ServiceReturns401()
-        {
-            HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsAnonymous();
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        //[Test]
+        //public async Task ServiceReturns401()
+        //{
+        //    HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsAnonymous();
+        //    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
 
-        }
+        //}
 
-        [Test]
-        public async Task ServiceReturns200()
-        {
-            HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsAdmin();
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
+        //[Test]
+        //public async Task ServiceReturns200()
+        //{
+        //    HttpResponseMessage response = await GetHttpResponseMessageBaseAddressAsAdmin();
+        //    response.StatusCode.Should().Be(HttpStatusCode.OK);
+        //}
     }
 }
