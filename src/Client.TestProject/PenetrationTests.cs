@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
+using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -11,6 +13,8 @@ namespace Solution.Client.TestProject
 
     public class PenetrationTests : TestBase
     {
+        private const string uri = "https://api.ididevsecops.net";
+
         [Test]
         public async Task TestNetConnection()
         {
@@ -22,8 +26,23 @@ namespace Solution.Client.TestProject
         public async Task TestAppConnection()
         {
             HttpResponseMessage response = await GetHttpResponseMessageHealthAddressAsAnonymous();
-            Trace.WriteLine(response.Headers);
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+        }
+
+        [Test]
+        public async Task TestAppHeaderForFrontDoor()
+        {
+            HttpResponseMessage response = await GetHttpResponseMessage(new Uri(uri), null);
+            response.Headers.Where(e => e.Key == "fd-dev-idso-000").Should().HaveCount(1);
+            Trace.WriteLine(response.Headers.Where(e => e.Key == "fd-dev-idso-000").FirstOrDefault().Value.FirstOrDefault());
+        }
+
+        [Test]
+        public async Task TestAppHeaderForApiManagement()
+        {
+            HttpResponseMessage response = await GetHttpResponseMessage(new Uri(uri), null);
+            response.Headers.Where(e => e.Key == "apim-dev-idso-000").Should().HaveCount(1);
+            Trace.WriteLine(response.Headers.Where(e => e.Key == "apim-dev-idso-000").FirstOrDefault().Value.FirstOrDefault());
         }
 
         //[Test]

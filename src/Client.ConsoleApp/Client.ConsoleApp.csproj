@@ -8,15 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="appsettings.json" />
         <None Remove="TrafficLight.png" />
         <None Remove="TrafficLight.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="appsettings.json">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </Content>
     </ItemGroup>
 
     <ItemGroup>

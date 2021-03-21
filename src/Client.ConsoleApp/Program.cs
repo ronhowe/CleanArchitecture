@@ -3,8 +3,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace Client.ConsoleApp
 {
@@ -15,23 +13,13 @@ namespace Client.ConsoleApp
 
     public class Program
     {
-        static AppSettings appSettings = new AppSettings();
-
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-
-            var configuration = builder.Build();
-
-            ConfigurationBinder.Bind(configuration.GetSection("AppSettings"), appSettings);
-
             while (true)
             {
                 try
                 {
-                    Uri uri = new Uri(appSettings.Endpoint);
+                    Uri uri = new Uri(args[0]);
                     var client = new HttpClient();
 
                     Console.Title = uri.ToString();
