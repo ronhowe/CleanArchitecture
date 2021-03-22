@@ -40,13 +40,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client.TestProject", "src\C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Domain.UnitTests", "tests\Sdk.Domain.UnitTests\Sdk.Domain.UnitTests.csproj", "{A55A3808-807A-4C7F-968F-C68DB0D5B7CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdk.Application", "src\Sdk.Application\Sdk.Application.csproj", "{95C58D57-3843-4315-AF8C-8CE78DBD844B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Application", "src\Sdk.Application\Sdk.Application.csproj", "{95C58D57-3843-4315-AF8C-8CE78DBD844B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdk.Application.UnitTests", "tests\Sdk.Application.UnitTests\Sdk.Application.UnitTests.csproj", "{A5AF8144-3FC2-4675-A33B-A713755582FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Application.UnitTests", "tests\Sdk.Application.UnitTests\Sdk.Application.UnitTests.csproj", "{A5AF8144-3FC2-4675-A33B-A713755582FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Domain", "src\Sdk.Domain\Sdk.Domain.csproj", "{EACD1C44-8AE2-4809-AEC0-0B2CEA9349F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sdk.Infrastructure", "src\Sdk.Infrastructure\Sdk.Infrastructure.csproj", "{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sdk.Infrastructure", "src\Sdk.Infrastructure\Sdk.Infrastructure.csproj", "{61B70FEA-0C13-4A9C-9D29-C6AA93069DC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
