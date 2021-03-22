@@ -7,6 +7,6 @@
         EnableLogWarning,
         EnableLogError,
         EnableLogCritical,
-        KillSwitch
+        EnableKillSwitch
     }
 }
