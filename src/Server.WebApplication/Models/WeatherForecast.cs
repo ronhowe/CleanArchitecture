@@ -1,6 +1,6 @@
 using System;
 
-namespace Server.WebApplication
+namespace Server.WebApplication.Models
 {
     public class WeatherForecast
     {

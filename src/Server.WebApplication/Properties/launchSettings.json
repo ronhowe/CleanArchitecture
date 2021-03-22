@@ -19,9 +19,9 @@
     },
     "Server.WebApplication": {
       "commandName": "Project",
-      "launchBrowser": false,
       "launchUrl": "swagger",
       "environmentVariables": {
+        "WEBSITE_SITE_NAME": "localhost",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": "true",

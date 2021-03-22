@@ -55,8 +55,6 @@ namespace Server.WebApplication
 
             if (env.IsDevelopment())
             {
-                _logger.LogWarning($"DEV ENVIRONMENT");
-
                 app.UseDeveloperExceptionPage();
 
                 app.UseSwagger();
@@ -82,20 +80,120 @@ namespace Server.WebApplication
 
                 endpoints.MapGet("/", async context =>
                 {
-                    _logger.LogInformation($"post={DateTime.Now}");
+                    MockLogMessage();
 
-                    if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableKillSwitch)).Result)
-                    {
-                        string message = $"Time:{DateTime.UtcNow},EnableKillSwitch={FeatureFlags.EnableKillSwitch}";
-                        _logger.LogCritical(message);
-                        throw new NotImplementedException(message);
-                    }
+                    MockApplicationException();
 
-                    context.Response.Headers.Add("post", DateTime.UtcNow.ToString());
+                    AddPostHeader(context);
 
-                    await context.Response.WriteAsync("");
+                    AddDevelopmentHeader(env, context);
+
+                    AddHostHeader(context);
+
+                    await context.Response.WriteAsync(String.Empty);
                 });
             });
+
+            void MockLogMessage()
+            {
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogDebug)).Result
+                )
+                {
+                    _logger.LogDebug($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result
+                )
+                {
+                    _logger.LogTrace($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogInformation)).Result
+                )
+                {
+                    _logger.LogInformation($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogWarning)).Result
+                )
+                {
+                    _logger.LogWarning($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogError)).Result
+                )
+                {
+                    _logger.LogError($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+
+                if
+                (
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.MockLogMessages)).Result &&
+                    _featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogCritical)).Result
+                )
+                {
+                    _logger.LogCritical($"{DateTime.UtcNow} FeatureFlags.MockLogMessages");
+                }
+            }
+
+            void MockApplicationException()
+            {
+                if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.MockApplicationException)).Result)
+                {
+                    throw new NotImplementedException($"{DateTime.UtcNow} FeatureFlags.MockApplicationException");
+                }
+            }
+
+            void AddPostHeader(HttpContext context)
+            {
+                if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
+                {
+                    _logger.LogTrace("Adding x-application-post header.");
+                }
+
+                context.Response.Headers.Add("x-application-post", $"post={DateTime.UtcNow}");
+            }
+
+            void AddDevelopmentHeader(IWebHostEnvironment env, HttpContext context)
+            {
+                if (env.IsDevelopment())
+                {
+                    if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
+                    {
+                        _logger.LogTrace("Adding x-application-evelopment header.");
+                    }
+
+                    context.Response.Headers.Add("x-application-development", "development");
+                }
+            }
+
+            void AddHostHeader(HttpContext context)
+            {
+                if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME")))
+                {
+                    if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
+                    {
+                        _logger.LogTrace("Adding x-application-host header.");
+                    }
+
+                    context.Response.Headers.Add("x-application-host", Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME"));
+                }
+            }
         }
     }
 }

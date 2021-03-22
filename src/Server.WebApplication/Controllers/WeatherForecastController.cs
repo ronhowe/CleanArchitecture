@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
+using Server.WebApplication.Models;
 //using Microsoft.Identity.Web.Resource;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Server.WebApplication.Controllers
 {
@@ -42,9 +42,9 @@ namespace Server.WebApplication.Controllers
             // TODO - Implement VerifyUserHasAnyAcceptedScope
             // HttpContext.VerifyUserHasAnyAcceptedScope(scopeRequiredByApi);
 
-            if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableKillSwitch)).Result)
+            if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.MockApplicationException)).Result)
             {
-                string message = $"Time:{DateTime.UtcNow},EnableKillSwitch={FeatureFlags.EnableKillSwitch}";
+                string message = $"Time:{DateTime.UtcNow},MockApplicationException={FeatureFlags.MockApplicationException}";
                 _logger.LogCritical(message);
                 throw new NotImplementedException(message);
             }

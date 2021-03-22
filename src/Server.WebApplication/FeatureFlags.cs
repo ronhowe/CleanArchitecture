@@ -3,10 +3,12 @@
     public enum FeatureFlags
     {
         EnableLogTrace,
+        EnableLogDebug,
         EnableLogInformation,
         EnableLogWarning,
         EnableLogError,
         EnableLogCritical,
-        EnableKillSwitch
+        MockApplicationException,
+        MockLogMessages
     }
 }
