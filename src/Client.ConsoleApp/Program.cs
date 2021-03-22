@@ -6,39 +6,40 @@ using System.Threading;
 
 namespace Client.ConsoleApp
 {
-    public class AppSettings
-    {
-        public string Endpoint { get; set; }
-    }
-
     public class Program
     {
         static void Main(string[] args)
         {
+            Uri uri = new(args[0]);
+
             while (true)
             {
+                HttpClient client = new();
+
                 try
                 {
-                    Uri uri = new Uri(args[0]);
-                    var client = new HttpClient();
-
-                    Console.Title = uri.ToString();
-
                     client.GetAsync(uri).Result.StatusCode.Should().Be(HttpStatusCode.OK);
 
-                    Console.BackgroundColor = ConsoleColor.DarkGreen;
-                    Console.Clear();
-                    Console.WriteLine($"{DateTime.Now}\nOK");
+                    Refresh("OK", uri, ConsoleColor.DarkGreen);
                 }
                 catch (Exception e)
                 {
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.Clear();
-                    Console.WriteLine($"{DateTime.Now}\n{e.Message}");
+                    Refresh(e.Message, uri, ConsoleColor.DarkRed);
+                }
+                finally
+                {
+                    client.Dispose();
                 }
 
                 Thread.Sleep(1000);
             }
+        }
+
+        private static void Refresh(string message, Uri uri, ConsoleColor color)
+        {
+            Console.BackgroundColor = color;
+            Console.Clear();
+            Console.WriteLine($"{DateTime.Now} - {uri} - {message}");
         }
     }
 }
