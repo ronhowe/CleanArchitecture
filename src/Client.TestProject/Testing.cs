@@ -78,6 +78,7 @@ namespace Solution.Client.TestProject
 
         //    return result.AccessToken;
         //}
+
         //public static async Task<HttpResponseMessage> GetHttpResponseMessageHealthAddressAsAnonymous()
         //{
         //    return await GetHttpResponseMessage(new Uri(_configuration.GetAddress), null);
@@ -125,10 +126,10 @@ namespace Solution.Client.TestProject
 
         public static async Task<HttpResponseMessage> GetHttpResponseMessageAsAnonymous(Uri uri)
         {
-            return await GetHttpResponseMessage(uri, null);
+            return await GetHttpResponseMessageAsUser(uri, null);
         }
 
-        public static async Task<HttpResponseMessage> GetHttpResponseMessage(Uri uri, string token)
+        public static async Task<HttpResponseMessage> GetHttpResponseMessageAsUser(Uri uri, string token)
         {
             var client = new HttpClient();
 

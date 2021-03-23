@@ -16,7 +16,7 @@ namespace Solution.Client.TestProject
             response.Headers.Where(e => e.Key == key).Should().HaveCount(1);
             response.Headers.Where(e => e.Key == key).First().Value.Should().HaveCount(1);
             response.Headers.Where(e => e.Key == key).First().Value.First().Should().NotBeNullOrEmpty();
-            Trace.WriteLine(response.Headers.Where(e => e.Key == key).First().Value.First());
+            Trace.WriteLine($"header={response.Headers.Where(e => e.Key == key).First().Value.First()}");
         }
 
         private static void AssertHeader(HttpResponseMessage response, string key, string value)
@@ -27,10 +27,10 @@ namespace Solution.Client.TestProject
         }
 
         [Test]
-        public async Task TestPostHeader()
+        public async Task TestApplicationHeader()
         {
             HttpResponseMessage response = await GetHttpResponseMessageFromApplicationEndpoint();
-            AssertHeader(response, "x-post");
+            AssertHeader(response, Configuration["ApplicationHeaderKey"]);
         }
 
         [Test]
