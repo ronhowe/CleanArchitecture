@@ -1,3 +1,4 @@
+using Azure.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -20,11 +21,14 @@ namespace Server.WebApplication
                     {
                         var settings = config.Build();
 
-                        var connectionString = settings.GetConnectionString("AzureAppConfiguration");
+                        //var connectionString = settings.GetConnectionString("AzureAppConfiguration");
 
                         config.AddAzureAppConfiguration(options =>
                         {
-                            options.Connect(connectionString)
+                            options
+                            //.Connect(connectionString)
+                            //.Connect(new Uri(settings["AppConfig:Endpoint"]), new ManagedIdentityCredential())
+                            .Connect(new Uri(settings["AppConfig:Endpoint"]), new DefaultAzureCredential(true))
                                    .ConfigureRefresh(refresh =>
                                    {
                                        refresh.Register("sentinel", refreshAll: true)

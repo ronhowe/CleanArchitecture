@@ -84,11 +84,9 @@ namespace Server.WebApplication
 
                     MockApplicationException();
 
-                    AddPostHeader(context);
+                    AddApplicationHeader(context);
 
-                    AddDevelopmentHeader(env, context);
-
-                    AddHostHeader(context);
+                    AddAppServiceHeader(context);
 
                     await context.Response.WriteAsync(String.Empty);
                 });
@@ -159,39 +157,26 @@ namespace Server.WebApplication
                 }
             }
 
-            void AddPostHeader(HttpContext context)
+            void AddApplicationHeader(HttpContext context)
             {
                 if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
                 {
-                    _logger.LogTrace("Adding x-application-post header.");
+                    _logger.LogTrace("Adding x-idso-application header.");
                 }
 
-                context.Response.Headers.Add("x-application-post", $"post={DateTime.UtcNow}");
+                context.Response.Headers.Add("x-idso-application", $"POST @ {DateTime.UtcNow}");
             }
 
-            void AddDevelopmentHeader(IWebHostEnvironment env, HttpContext context)
-            {
-                if (env.IsDevelopment())
-                {
-                    if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
-                    {
-                        _logger.LogTrace("Adding x-application-evelopment header.");
-                    }
-
-                    context.Response.Headers.Add("x-application-development", "development");
-                }
-            }
-
-            void AddHostHeader(HttpContext context)
+            void AddAppServiceHeader(HttpContext context)
             {
                 if (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME")))
                 {
                     if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.EnableLogTrace)).Result)
                     {
-                        _logger.LogTrace("Adding x-application-host header.");
+                        _logger.LogTrace("Adding x-idso-appservice-name header.");
                     }
 
-                    context.Response.Headers.Add("x-application-host", Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME"));
+                    context.Response.Headers.Add("x-idso-appservice-name", Environment.GetEnvironmentVariable("WEBSITE_SITE_NAME"));
                 }
             }
         }
