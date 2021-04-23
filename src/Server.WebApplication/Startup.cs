@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.FeatureManagement;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Server.WebApplication
 {
@@ -88,9 +89,46 @@ namespace Server.WebApplication
 
                     AddAppServiceHeader(context);
 
+                    MockCpuUsage();
+
                     await context.Response.WriteAsync(String.Empty);
                 });
             });
+
+            void MockCpuUsage()
+            {
+                int iterations = Int32.Parse(_configuration["iterations"]);
+
+                logger.LogDebug("iterations = " + iterations);
+
+                if (iterations > 20000)
+                {
+                    iterations = 20000;
+                }
+
+                List<int> primes = new List<int>();
+
+                bool isPrime = true;
+
+                for (int i = 2; i <= iterations; i++)
+                {
+                    for (int j = 2; j <= iterations; j++)
+                    {
+                        if (i != j && i % j == 0)
+                        {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+
+                    if (isPrime)
+                    {
+                        primes.Add(i);
+                    }
+
+                    isPrime = true;
+                }
+            }
 
             void MockLogMessage()
             {
@@ -153,7 +191,8 @@ namespace Server.WebApplication
             {
                 if (_featureManager.IsEnabledAsync(nameof(FeatureFlags.MockApplicationException)).Result)
                 {
-                    throw new NotImplementedException($"{DateTime.UtcNow} FeatureFlags.MockApplicationException");
+                    //throw new NotImplementedException($"{DateTime.UtcNow} FeatureFlags.MockApplicationException");
+                    throw new NotImplementedException("SCENARIO 12345");
                 }
             }
 

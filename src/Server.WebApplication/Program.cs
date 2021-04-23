@@ -20,7 +20,7 @@ namespace Server.WebApplication
                     {
                         var settings = config.Build();
 
-                        //var connectionString = settings.GetConnectionString("AzureAppConfiguration");
+                        var connectionString = settings.GetConnectionString("AppConfig");
 
                         config.AddAzureAppConfiguration(options =>
                         {

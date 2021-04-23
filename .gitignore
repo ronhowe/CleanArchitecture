@@ -234,3 +234,5 @@ _Pvt_Extensions
 .fake/
 /NDependOut
 /CleanArchitecture.ndproj
+
+/src/Server.WebApplication/Properties
